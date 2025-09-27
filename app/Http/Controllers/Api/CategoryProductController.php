@@ -30,8 +30,12 @@ class CategoryProductController extends Controller
             ];
         }
 
+        $category_ids = $category->parent_id === 0
+            ? $category->subcategories()->pluck('id')->push($category->id)->toArray()
+            : [$category->id];
+
         $query = Product::query()
-            ->where('category_id', $category->id);
+            ->whereIn('category_id', $category_ids);
 
         $total = $query->count();
 
