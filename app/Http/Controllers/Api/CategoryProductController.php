@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 
 class CategoryProductController extends Controller
 {
+    const WITH_SUBCATEGORIES_PRODUCTS = false;
+
     public function categoryProducts(Request $request, $category_slug)
     {
         $skip = (int) ($request->skip ?? 0);
@@ -31,7 +33,7 @@ class CategoryProductController extends Controller
             ];
         }
 
-        $category_ids = $category->parent_id === 0
+        $category_ids = self::WITH_SUBCATEGORIES_PRODUCTS && $category->parent_id === 0
             ? $category->subcategories()->pluck('id')->push($category->id)->toArray()
             : [$category->id];
 
