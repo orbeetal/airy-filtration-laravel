@@ -17,4 +17,14 @@ class CategoryController extends Controller
 
         return CategoryResource::collection($categories);
     }
+
+    public function show($slug)
+    {
+        $category = Category::query()
+            ->with('subcategories')
+            ->where('slug', $slug)
+            ->first();
+
+        return CategoryResource::make($category);
+    }
 }
