@@ -17,6 +17,7 @@ class CategoryProductController extends Controller
         $take = (int) ($request->take ?? 10);
 
         $category = Category::query()
+            ->with('subcategories')
             ->where('slug', $category_slug)
             ->first();
 
