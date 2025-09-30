@@ -12,10 +12,6 @@ class Banner extends Model
 
     const PAGES = [
         'home',
-        'about',
-        'cleanroom',
-        'hvac',
-        'air-filtration',
     ];
 
     protected $guarded = [];

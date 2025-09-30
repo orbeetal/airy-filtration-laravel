@@ -53,7 +53,7 @@
                     <span class="md:text-xl lg:text-2xl">Equipments</span>
                 </a>
             </div> -->
-            <!-- <div class="bg-white overflow-hidden shadow-sm rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                 <a
                     href="/dashboard/banners"
                     class="flex flex-col justify-center gap-4 items-center p-6 text-center"
@@ -63,7 +63,7 @@
                     />
                     <span class="md:text-xl lg:text-2xl">Banners</span>
                 </a>
-            </div> -->
+            </div>
             <!-- <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                 <a
                     href="/dashboard/blogs"

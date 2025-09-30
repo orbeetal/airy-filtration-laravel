@@ -61,11 +61,11 @@ Route::prefix('v1')->group(function () {
 
     // Route::get('/search/{text}', [ProductController::class, 'search']);
 
-    // Route::get('/products', [ProductController::class, 'index']);
-    // Route::get('/products/{slug}', [ProductController::class, 'show']);
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/{slug}', [ProductController::class, 'show']);
 
-    // Route::get('/latest/products', [ProductController::class, 'latestProducts']);
-    // Route::get('/random/products', [ProductController::class, 'randomProducts']);
+    Route::get('/latest/products', [ProductController::class, 'latestProducts']);
+    Route::get('/random/products', [ProductController::class, 'randomProducts']);
 
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/categories/{category}/products', [CategoryProductController::class, 'categoryProducts']);
@@ -86,12 +86,12 @@ Route::prefix('v1')->group(function () {
 
     // Route::get('/gallery', [GalleryController::class, 'index']);
 
-    // Route::get('/pages', fn () => response()->json(\App\Models\Banner::PAGES));
+    Route::get('/pages', fn () => response()->json(\App\Models\Banner::PAGES));
 
-    // Route::get('/pages/{page}/banners', [BannerController::class, 'index']);
+    Route::get('/pages/{page}/banners', [BannerController::class, 'index']);
 
-    // Route::get('/banners/{id}/image.webp', [BannerController::class, 'streamImage'])
-    //     ->name('banners.streamImage');
+    Route::get('/banners/{id}/image.webp', [BannerController::class, 'streamImage'])
+        ->name('banners.streamImage');
 
     // Route::get('/settings', [SettingController::class, 'index']);
     
