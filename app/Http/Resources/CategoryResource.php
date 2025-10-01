@@ -18,7 +18,11 @@ class CategoryResource extends JsonResource
         return [
             'name'      => (string) $this->name,
             'slug'      => (string) ($this->slug ?? Str::slug($this->name)),
-            'photo'     => $this->when($this->parent_id == 0, fn() => $this->photo ?? ''),
+            'banner'    => $this->when($this->parent_id == 0,
+                fn() => $this->image 
+                    ? route('categories.streamImage', $this->id) . "?v=" . ($this->updated_at->timestamp ?? time()) 
+                    : ""
+            ),
             'description'   => (string) ($this->description ?? ''),
             'subcategories' => $this->whenLoaded('subcategories',
                 fn() => CategoryResource::collection($this->subcategories)

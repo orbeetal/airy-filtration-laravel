@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $category = Category::create(
             $this->getValidatedData($request) + [
                 "parent_id" => $request->parent_id ?? 0,
-            ]
+            ] + $this->getPhotoData($request, 1920, 600)
         );
 
         return to_route('dashboard.categories.index', [
@@ -90,6 +90,7 @@ class CategoryController extends Controller
 
         $category->update(
             $this->getValidatedData($request, $category->id)
+            + $this->getPhotoData($request, 1920, 600)
         );
 
         // return $category;

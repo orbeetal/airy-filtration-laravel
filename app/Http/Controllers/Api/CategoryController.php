@@ -28,4 +28,15 @@ class CategoryController extends Controller
 
         return CategoryResource::make($category);
     }
+
+    public function streamImage($id)
+    {
+        $category = Category::select('image')->findOrFail($id);
+
+        $imageData = $this->getImageData($category->image);
+        
+        return $imageData
+            ? response($imageData)->header('Content-Type', 'image/webp')
+            : abort(404);
+    }
 }

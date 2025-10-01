@@ -39,6 +39,7 @@ Route::prefix('v1')->group(function () {
                 'equipment.photo.stream',
                 'banners.streamImage',
                 'settings.streamImage',
+                'categories.streamImage',
             ];
 
             if(
@@ -69,6 +70,8 @@ Route::prefix('v1')->group(function () {
 
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/categories/{category}', [CategoryController::class, 'show']);
+    Route::get('/categories/{id}/image.webp', [CategoryController::class, 'streamImage'])
+        ->name('categories.streamImage');
     Route::get('/categories/{category}/products', [CategoryProductController::class, 'categoryProducts']);
 
     Route::get('/industries', [IndustryController::class, 'index']);
