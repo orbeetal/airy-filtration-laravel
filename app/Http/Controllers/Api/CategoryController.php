@@ -12,6 +12,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::query()
+            ->mainCategories()
             ->with('subcategories')
             ->get();
 
