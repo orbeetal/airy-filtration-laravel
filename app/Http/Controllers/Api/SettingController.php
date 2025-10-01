@@ -18,6 +18,16 @@ class SettingController extends Controller
         return $this->index('about');
     }
 
+    public function vision()
+    {
+        return $this->index('vision');
+    }
+
+    public function mission()
+    {
+        return $this->index('mission');
+    }
+
     public function product()
     {
         return $this->index('product');
@@ -38,14 +48,30 @@ class SettingController extends Controller
 
         $properties = Setting::CRITERIA[$criteria] ?? [];
 
-        $settings = $properties
-            ? Setting::whereIn('property', $properties)
-                ->get()
-                ->mapWithKeys(fn($setting) => [$setting->property => $setting->value])
-                ->toArray()
-            : [];
+        return response()->json(
+            $this->getSettingDataByProperties($properties)
+        );
+    }
 
-        return response()->json($settings);
+    protected function getSettingDataByProperties($properties)
+    {
+        $settings = Setting::query()
+            ->whereIn('property', $properties)
+            ->get()
+            ->mapWithKeys(
+                fn($setting) => [
+                    $setting->property => $setting->value
+                ]
+            )
+            ->toArray();
+
+        $data = [];
+
+        foreach($properties as $property) {
+            $data[$property] = $settings[$property] ?? '';
+        }
+
+        return $data;
     }
 
     public function streamImage($property)

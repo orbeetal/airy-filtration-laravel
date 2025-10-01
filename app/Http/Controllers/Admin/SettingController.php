@@ -10,6 +10,8 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class SettingController extends Controller
 {
+    const DEFAULT_PHOTO_SIZE = ['width' => 320, 'height' => 320];
+
     public function index()
     {
         return view('admin.settings.index');
@@ -26,7 +28,9 @@ class SettingController extends Controller
         // return
         $settings = $this->getSettings($criteria);
 
-        return view('admin.settings.' . $criteria, compact('settings'));
+        $photo_size = Setting::PHOTO_SIZES[$criteria] ?? self::DEFAULT_PHOTO_SIZE;
+
+        return view('admin.settings.' . $criteria, compact('settings', 'photo_size'));
     }
 
     protected function getSettings($criteria)
@@ -47,7 +51,7 @@ class SettingController extends Controller
                     ['property' => $property],
                     [
                         'value' => $value instanceof UploadedFile
-                            ? $this->getPhotoStringData($value, 5 * 64, 6 * 64)
+                            ? $this->getPhotoStringData($value, $request->criteria)
                             : $value,
                     ]
                 );
@@ -59,15 +63,30 @@ class SettingController extends Controller
         }
     }
 
-    protected function getPhotoStringData($file, $width = 320, $height = 320): string
+    protected function resolveCriteriaPhotoSize($criteria = null): array
     {
+        return Setting::PHOTO_SIZES[$criteria] ?? self::DEFAULT_PHOTO_SIZE;
+    }
+
+    protected function getPhotoStringData($file, $criteria = null): string
+    {
+        // dd($file, $criteria);
+        
         if(!is_file($file) || !$file->isValid()) {
-            return '';  
+            return '';
         }
+
+        // dd($file, $criteria);
+
+        $photoSize = $this->resolveCriteriaPhotoSize($criteria);
+
+        // dd($photoSize);
 
         $image = Image::read($file);
 
-        $image = $image->cover($width, $height)->toWebp()->toDataUri();
+        $image = $image->cover($photoSize['width'], $photoSize['height'])
+            ->toWebp()
+            ->toDataUri();
 
         return $image;
     }

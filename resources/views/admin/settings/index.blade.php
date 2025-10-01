@@ -31,6 +31,28 @@
                     <span class="md:text-xl lg:text-2xl">About Settings</span>
                 </a>
             </div>
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg">
+                <a
+                    href="/dashboard/vision/settings"
+                    class="flex flex-col justify-center gap-4 items-center p-6 text-center"
+                >
+                    <x-icons.solid.home-modern
+                        class="size-6 md:size-10 lg:size-16 text-brand-primary"
+                    />
+                    <span class="md:text-xl lg:text-2xl">Vision Settings</span>
+                </a>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg">
+                <a
+                    href="/dashboard/mission/settings"
+                    class="flex flex-col justify-center gap-4 items-center p-6 text-center"
+                >
+                    <x-icons.solid.home-modern
+                        class="size-6 md:size-10 lg:size-16 text-brand-primary"
+                    />
+                    <span class="md:text-xl lg:text-2xl">Mission Settings</span>
+                </a>
+            </div>
             
             <!-- <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                 <a

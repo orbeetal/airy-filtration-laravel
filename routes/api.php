@@ -98,6 +98,8 @@ Route::prefix('v1')->group(function () {
     
     Route::get('/contact/settings', [SettingController::class, 'contact']);
     Route::get('/about/settings', [SettingController::class, 'about']);
+    Route::get('/vision/settings', [SettingController::class, 'vision']);
+    Route::get('/mission/settings', [SettingController::class, 'mission']);
     // Route::get('/product/settings', [SettingController::class, 'product']);
     // Route::get('/service/settings', [SettingController::class, 'service']);
 

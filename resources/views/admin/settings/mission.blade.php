@@ -8,7 +8,7 @@
                 &larr; Back to Settings
             </a>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __("About Settings Form") }}
+                {{ __("Mission Settings Form") }}
             </h2>
         </div>
     </x-slot>
@@ -37,7 +37,7 @@
             >
                 @csrf @method('PUT')
 
-                <input type="hidden" name="criteria" value="about" />
+                <input type="hidden" name="criteria" value="mission" />
 
                 <div class="grid gap-4 md:grid-cols-2">
                     <div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="flex items-center">
                             <label
-                                for="about_company_thumbnail"
+                                for="company_mission_thumbnail"
                                 class="border w-full cursor-pointer overflow-hidden bg-red-300"
                                 {!! 'sty' . 'le="aspect-ratio:' . $photo_size["width"] . '/' . $photo_size["height"] . '"' !!}
                             >
@@ -55,7 +55,7 @@
                                     id="imagePreview"
                                     src="{{
                                         $settings[
-                                            'about_company_thumbnail'
+                                            'company_mission_thumbnail'
                                         ] ?? ''
                                     }}"
                                     alt="Thumbnail"
@@ -63,8 +63,8 @@
                                     {!! 'sty' . 'le="aspect-ratio:' . $photo_size["width"] . '/' . $photo_size["height"] . '"' !!}
                                 />
                                 <input
-                                    name="settings[about_company_thumbnail]"
-                                    id="about_company_thumbnail"
+                                    name="settings[company_mission_thumbnail]"
+                                    id="company_mission_thumbnail"
                                     onchange="previewImage(event, 'imagePreview')"
                                     class="hidden"
                                     type="file"
@@ -72,56 +72,56 @@
                                 />
                             </label>
                         </div>
-                        @error('about_company_thumbnail')
+                        @error('company_mission_thumbnail')
                         <div class="text-red-500 mt-1">{{ $message }}</div>
                         @enderror
                     </div>
                     <div>
                         <div>
                             <label
-                                for="about_company_headline"
+                                for="company_mission_headline"
                                 class="block text-xl sm:text-2xl font-medium text-gray-400"
                             >
-                                About Company Headline
+                                Company Mission Headline
                             </label>
                             <textarea
                                 rows="3"
                                 type="text"
-                                id="about_company_headline"
-                                name="settings[about_company_headline]"
+                                id="company_mission_headline"
+                                name="settings[company_mission_headline]"
                                 class="mt-1 p-2 w-full border border-gray-300 rounded-md text-4xl sm:text-5xl"
                                 >{{
-                                    old("about_company_headline") ??
-                                        ($settings["about_company_headline"] ??
+                                    old("company_mission_headline") ??
+                                        ($settings["company_mission_headline"] ??
                                             "")
                                 }}</textarea
                             >
-                            @error('about_company_headline')
+                            @error('company_mission_headline')
                             <div class="text-red-500 mt-1">{{ $message }}</div>
                             @enderror
                         </div>
                         <div>
                             <label
-                                for="about_company_description"
+                                for="company_mission_description"
                                 class="block text-xl sm:text-2xl font-medium text-gray-400"
                             >
-                                About Company Description
+                                Company Mission Description
                             </label>
                             <textarea
                                 rows="6"
                                 type="text"
-                                id="about_company_description"
-                                name="settings[about_company_description]"
+                                id="company_mission_description"
+                                name="settings[company_mission_description]"
                                 class="mt-1 p-2 w-full border border-gray-300 rounded-md"
                                 >{{
-                                    old("about_company_description") ??
+                                    old("company_mission_description") ??
                                         ($settings[
-                                            "about_company_description"
+                                            "company_mission_description"
                                         ] ??
                                             "")
                                 }}</textarea
                             >
-                            @error('about_company_description')
+                            @error('company_mission_description')
                             <div class="text-red-500 mt-1">{{ $message }}</div>
                             @enderror
                         </div>
