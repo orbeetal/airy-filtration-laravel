@@ -44,6 +44,7 @@ class IndustryController extends Controller
 
         $industry = Industry::create(
             $this->getValidatedData($request)
+            + $this->getPhotoData($request, 1920, 600)
         );
 
         return to_route('dashboard.industries.index', [
@@ -83,6 +84,7 @@ class IndustryController extends Controller
 
         $industry->update(
             $this->getValidatedData($request, $industry->id)
+            + $this->getPhotoData($request, 1920, 600)
         );
 
         // return $industry;
@@ -120,6 +122,7 @@ class IndustryController extends Controller
                 'required',
                 Rule::unique('industries')->ignore($id),
             ],
+            'description' => "nullable|string",
         ]);
     }
 }
