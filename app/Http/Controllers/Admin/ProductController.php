@@ -20,8 +20,8 @@ class ProductController extends Controller
         // return
         $products = Product::query()
             ->with([
-                'category',
-                'industry',
+                'category:id,name',
+                'industries:id,name',
             ])
             ->latest()
             ->paginate();
@@ -52,6 +52,8 @@ class ProductController extends Controller
             + $this->getSpecificationData($request)
         );
 
+        $product->industries()->sync($request->industry_ids);
+
         return to_route('dashboard.products.show', $product->id);
     }
 
@@ -76,6 +78,10 @@ class ProductController extends Controller
     {
         // return $product;
 
+        $product->load([
+            'industries:id,name',
+        ]);
+
         return view("admin.products.edit", $this->getFormData($product));
     }
 
@@ -93,6 +99,8 @@ class ProductController extends Controller
             + $this->getPhotosData($request, $product->photos)
             + $this->getSpecificationData($request, $product->specifications)
         );
+
+        $product->industries()->sync($request->industry_ids);
 
         // return $product;
 
@@ -145,7 +153,8 @@ class ProductController extends Controller
             ],
             "price" => "",
             "category_id" => "required|exists:App\Models\Category,id",
-            "industry_id" => "nullable|exists:App\Models\Industry,id",
+            "industry_ids" => "nullable|array",
+            "industry_ids.*" => "exists:App\Models\Industry,id",
             "description" => "",
             "body" => "",
         ]);

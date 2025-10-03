@@ -7,6 +7,7 @@ use App\Traits\HasHistories;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
 class Industry extends Model
@@ -22,8 +23,8 @@ class Industry extends Model
         );
     }
 
-    public function products()
+    public function products(): BelongsToMany
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class, 'industry_product');
     }
 }

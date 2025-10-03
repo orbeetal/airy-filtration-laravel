@@ -49,20 +49,14 @@
     </div>
 
     <!-- Industry -->
-    <div class="col-span-6">
-        <label for="industry_id" class="block text-sm font-medium text-gray-700">Industry</label>
-        <select id="industry_id" name="industry_id" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-            <option value=""> -- Select Industry -- </option>
-            @foreach($industries as $industry)
-            <option 
-                value="{{ $industry->id }}" 
-                @selected((old('industry') ?? ($product->industry_id ?? '')) == $industry->id)
-            >
-                {{ $industry->name }}
-            </option>
-            @endforeach
-        </select>
-        @error('industry_id')
+    <div class="col-span-full">
+        <label for="industry_ids" class="block text-sm font-medium text-gray-700">Industry</label>
+        <x-multiple-select 
+            name="industry_ids" 
+            :options="$industries->map(fn($i) => ['id' => $i->id, 'name' => $i->name])" 
+            :selected="old('industry_ids', $product->industries->pluck('id')->toArray() ?? [])"
+        />
+        @error('industry_ids')
         <div class="text-red-500 mt-1">{{ $message }}</div>
         @enderror
     </div>

@@ -36,7 +36,13 @@
                                 {{ $product->category->name ?? '' }}
                             </td>
                             <td class="text-left">
-                                {{ $product->industry->name ?? '' }}
+                                <div class="flex gap-2 flex-wrap items-center">
+                                    @foreach($product->industries as $Industry)
+                                    <span class="border rounded-lg px-3 py-1 flex justify-center items-center bg-gray-200 text-sm">
+                                        {{ $Industry->name ?? '' }}
+                                    </span>
+                                    @endforeach
+                                </div>
                             </td>
                             <td class="text-left">
                                 {{ $product->name }}

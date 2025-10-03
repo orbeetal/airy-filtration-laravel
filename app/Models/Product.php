@@ -7,13 +7,16 @@ use App\Traits\HasHistories;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
 class Product extends Model
 {
     use HasFactory, HasAuthor, HasHistories;
 
-    protected $guarded = [];
+    protected $guarded = [
+        'industry_ids'
+    ];
 
     protected $appends = [
         'photo',
@@ -43,8 +46,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
     
-    public function industry()
+    public function industries(): BelongsToMany
     {
-        return $this->belongsTo(Industry::class);
+        return $this->belongsToMany(Industry::class, 'industry_product');
     }
 }
