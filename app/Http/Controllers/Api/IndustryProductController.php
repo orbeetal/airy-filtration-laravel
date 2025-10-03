@@ -31,7 +31,9 @@ class IndustryProductController extends Controller
         }
 
         $query = Product::query()
-            ->where('industry_id', $industry->id);
+            ->whereHas('industries', function ($q) use ($industry) {
+                $q->where('industry_id', $industry->id);
+            });
 
         $total = $query->count();
 
