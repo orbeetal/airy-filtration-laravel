@@ -73,8 +73,11 @@ Route::prefix('v1')->group(function () {
     Route::get('/categories/{id}/image.webp', [CategoryController::class, 'streamImage'])
         ->name('categories.streamImage');
     Route::get('/categories/{category}/products', [CategoryProductController::class, 'categoryProducts']);
-
+    
     Route::get('/industries', [IndustryController::class, 'index']);
+    Route::get('/industries/{industry}', [IndustryController::class, 'show']);
+    Route::get('/industries/{id}/image.webp', [IndustryController::class, 'streamImage'])
+        ->name('industries.streamImage');
     Route::get('/industries/{industry}/products', [IndustryProductController::class, 'industryProducts']);
 
     Route::get('/products/{id}/photos/{serial?}.webp', [ProductController::class, 'streamPhoto'])->name('product.photo.stream');

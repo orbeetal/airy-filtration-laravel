@@ -18,7 +18,12 @@ class IndustryProductController extends Controller
 
         $industry = Industry::query()
             ->where('slug', $industry_slug)
-            ->first();
+            ->first([
+                'id',
+                'slug',
+                'name',
+                'image',
+            ]);
 
         if(!$industry) {
             return [

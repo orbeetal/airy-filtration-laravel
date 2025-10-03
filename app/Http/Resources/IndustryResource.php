@@ -19,6 +19,12 @@ class IndustryResource extends JsonResource
             // 'id'    => $this->id,
             'name'  => $this->name,
             'slug'  => $this->slug ?? Str::slug($this->name),
+            'banner'    => $this->when($this->parent_id == 0,
+                fn() => $this->image 
+                    ? route('industries.streamImage', $this->id) . "?v=" . ($this->updated_at->timestamp ?? time()) 
+                    : ""
+            ),
+            "description"   => $this->whenHas('description', $this->description ?? ""),
         ];
     }
 }
